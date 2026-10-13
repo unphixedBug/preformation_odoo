@@ -130,7 +130,7 @@ for i in range(len(user_str)):
 
 print(result)
 
-# longest substr without repeating char
+# ! longest substr without repeating char
 
 user_str = input("Enter a text: ")
 
@@ -158,3 +158,4 @@ print(f"Substring: {longest_substr}")
 
 '''
 '''
+

@@ -83,7 +83,15 @@ for i in range(1, upperLimit):
 
 # fizzbuzz oneline
 
-
+for i in range(1, int(input("Upper limit: ")) + 1):
+    if i % 3 == 0 and i % 5 == 0:
+        print("FizzBuzz")
+    elif i % 3 == 0:
+        print("Fizz")
+    elif i % 5 == 0:
+        print("Buzz")
+    else:
+        print(i)
 
 ---
 
@@ -185,15 +193,19 @@ How many terms? 10
 Bonus: Display only the Fibonacci numbers that are even.
 '''
 
-# fizzbuzz oneline
 
-for i in range(1, int(input("Upper limit: ")) + 1):
-    if i % 3 == 0 and i % 5 == 0:
-        print("FizzBuzz")
-    elif i % 3 == 0:
-        print("Fizz")
-    elif i % 5 == 0:
-        print("Buzz")
-    else:
-        print(i)
 
+# !! leap year !!
+
+year = int(input("What year ? "))
+is_a_leap_year = False
+
+isDivBy4 = year % 4 == 0
+isDivBy100 = year % 100 == 0
+isDivBy400 = year % 400 == 0
+
+if isDivBy4:
+    if not isDivBy100:
+
+
+print(is_a_leap_year)
