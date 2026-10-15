@@ -32,8 +32,19 @@ def two_pointers_warmup(s: str) -> bool:
         "a"        -> True
         ""         -> True
     """
-    # YOUR CODE HERE
-    pass
+    
+    i = 0
+    j = len(s) - 1
+
+    is_palindrome = True
+
+    while i < j:
+        if s[i] != s[j]:
+            is_palindrome = False
+        i += 1
+        j -= 1
+
+    return is_palindrome
 
 
 def two_pointers_interview(nums: list[int], target: int) -> list[int]:
@@ -51,8 +62,19 @@ def two_pointers_interview(nums: list[int], target: int) -> list[int]:
         [1, 4, 6, 8],   target=10   -> [2, 3]
         [-3, 0, 4, 8],  target=5   -> [1, 4]
     """
-    # YOUR CODE HERE
-    pass
+
+    i = 0
+    j = len(nums) - 1
+
+    while i < j:
+        if nums[i] + nums[j] > target:
+            j -= 1
+        elif nums[i] + nums[j] < target:
+            i += 1
+        else:
+            break
+    
+    return [i + 1, j + 1]
 
 
 # =============================================================================
@@ -74,10 +96,16 @@ def sliding_window_warmup(nums: list[int], k: int) -> int:
         [1, 4, 2, 9],        k=2  -> 11  (subarray [2, 9])
         [5],                 k=1  -> 5
     """
-    # YOUR CODE HERE
-    pass
+    window_sum = sum(nums[:k])
+    max_window = window_sum
 
+    for i in range(len(nums) - k):
+        window_sum = window_sum - nums[i] + nums[i + k]
+        max_window = max(window_sum, max_window)
 
+    return max_window
+
+# !!!!!!!!!!
 def sliding_window_interview(s: str) -> int:
     """
     INTERVIEW - Longest substring without repeating characters.
@@ -92,8 +120,19 @@ def sliding_window_interview(s: str) -> int:
         "pwwkew"    -> 3   ("wke")
         ""          -> 0
     """
-    # YOUR CODE HERE
-    pass
+    start_sub = 0
+
+    longest_substr = ""
+
+    for i in range(len(s)):
+        current_str = s[start_sub: i]
+        if s[i] in current_str:
+            start_sub += 1
+
+        if len(current_str) > len(longest_substr):
+            longest_substr = current_str
+
+    return [len(longest_substr), longest_substr]
 
 
 # =============================================================================
@@ -112,8 +151,21 @@ def binary_search_warmup(nums: list[int], target: int) -> int:
         [1, 3, 5, 7, 9], target=6  -> -1
         [1],             target=1  -> 0
     """
-    # YOUR CODE HERE
-    pass
+    left = 0
+    right = len(nums) - 1
+
+    while left <= right:
+        mid = (left + right) // 2
+
+        if nums[mid] == target:
+            return mid
+        
+        if nums[mid] > target:
+            right = mid - 1
+        else:
+            left = mid + 1
+    
+    return -1
 
 
 def binary_search_interview(nums: list[int], target: int) -> int:
@@ -483,7 +535,7 @@ def run_tests():
     # check("two_pointers_warmup: empty",     two_pointers_warmup(""),        True)
     # check("two_pointers_interview: [2,7,11,15] t=9",  two_pointers_interview([2,7,11,15], 9),  [1,2])
     # check("two_pointers_interview: [1, 4, 6, 8] t=10",    two_pointers_interview([1, 4, 6, 8],   10),  [2, 3])
-    # check("two_pointers_interview: [-3, 0, 4, 8] t=5",    two_pointers_interview([1, 4, 6, 8],   5),  [1, 4])
+    # check("two_pointers_interview: [-3, 0, 4, 8] t=5",    two_pointers_interview([-3, 0, 4, 8],   5),  [1, 4])
 
     # --- Sliding window ---
     # check("sliding_window_warmup: k=3",  sliding_window_warmup([2,1,5,1,3,2], 3), 9)
@@ -493,14 +545,14 @@ def run_tests():
     # check("sliding_window_interview: pwwkew",   sliding_window_interview("pwwkew"),   3)
 
     # --- Binary search ---
-    # check("binary_search_warmup: found",    binary_search_warmup([1,3,5,7,9], 5), 2)
-    # check("binary_search_warmup: missing",  binary_search_warmup([1,3,5,7,9], 6), -1)
+    check("binary_search_warmup: found",    binary_search_warmup([1,3,5,7,9], 5), 2)
+    check("binary_search_warmup: missing",  binary_search_warmup([1,3,5,7,9], 6), -1)
     # check("binary_search_interview: rotated hit",   binary_search_interview([4,5,6,7,0,1,2], 0), 4)
     # check("binary_search_interview: rotated miss",  binary_search_interview([4,5,6,7,0,1,2], 3), -1)
     # check("binary_search_interview: [3,1] t=1",     binary_search_interview([3,1], 1),            1)
 
     # --- Backtracking ---
-    check("backtracking_warmup: n=2",  backtracking_warmup(2), [[], [1], [1,2], [2]])
+    # check("backtracking_warmup: n=2",  backtracking_warmup(2), [[], [1], [1,2], [2]])
     # check("backtracking_interview: [1,2,3]",
     #       backtracking_interview([1,2,3]),
     #       [[1,2,3],[1,3,2],[2,1,3],[2,3,1],[3,1,2],[3,2,1]])

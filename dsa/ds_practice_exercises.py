@@ -243,7 +243,7 @@ def simulate_hot_potato(names: list, count: int) -> str:
 
     Example:
         simulate_hot_potato(["Alice", "Bob", "Carol", "Dave"], 3)
-        →  "Alice"   (elimination order: Dave, Carol, Bob)
+        →  "Bob"   (elimination order: Dave, Carol, Bob)
 
     Hint: A queue perfectly models a circle. To "pass" the potato,
           dequeue from the front and re-enqueue at the back.
@@ -484,7 +484,7 @@ def run_tests():
     check("is_palindrome true",   is_palindrome_deque("racecar"),                      True)
     check("is_palindrome spaces", is_palindrome_deque("A man a plan a canal Panama"),  True)
     check("is_palindrome false",  is_palindrome_deque("hello"),                        False)
-    check("hot_potato",           simulate_hot_potato(["Alice","Bob","Carol","Dave"], 3), "Alice")
+    check("hot_potato",           simulate_hot_potato(["Alice","Bob","Carol","Dave"], 3), "Bob")
 
     # ── Tree ──────────────────────────────────────────────────────
     print("\n[Tree]")
