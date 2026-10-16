@@ -167,7 +167,7 @@ def binary_search_warmup(nums: list[int], target: int) -> int:
     
     return -1
 
-
+# !!!!!!!!!!!!!!!!!!
 def binary_search_interview(nums: list[int], target: int) -> int:
     """
     INTERVIEW - Search in a rotated sorted array.
@@ -185,8 +185,7 @@ def binary_search_interview(nums: list[int], target: int) -> int:
         [1],                   target=0  -> -1
         [3, 1],                target=1  -> 1
     """
-    # YOUR CODE HERE
-    pass
+    
 
 
 # =============================================================================
@@ -212,19 +211,19 @@ def backtracking_warmup(n: int) -> list[list[int]]:
         n=2  -> [[], [1], [1, 2], [2]]          (any order)
         n=3  -> [[], [1], [1,2], [1,2,3], [1,3], [2], [2,3], [3]]
     """
-    def backtrack(start, current):
-        print(type(current).__name__)
-        results.append(current)
-        print(results)
-        for i in range(start, n + 1):
-            current.append(i)
-            backtrack(i + 1, current)
-            current.pop()
+    # def backtrack(start, current):
+    #     print(type(current).__name__)
+    #     results.append(current)
+    #     print(results)
+    #     for i in range(start, n + 1):
+    #         current.append(i)
+    #         backtrack(i + 1, current)
+    #         current.pop()
 
-    results = []
-    backtrack(1, [])
+    # results = []
+    # backtrack(1, [])
 
-    return results
+    # return results
 
 
 def backtracking_interview(nums: list[int]) -> list[list[int]]:
@@ -445,8 +444,9 @@ def stack_warmup(s: str) -> bool:
         "([)]"     -> False
         "{[]}"     -> True
     """
-    # YOUR CODE HERE
-    pass
+    stack = []
+    for char in s:
+        
 
 
 def stack_interview(temperatures: list[int]) -> list[int]:
@@ -489,10 +489,14 @@ def prefix_warmup(nums: list[int], l: int, r: int) -> int:
         nums=[1,2,3,4,5], l=0, r=4  -> 15
         nums=[3,7,2],     l=0, r=0  -> 3
     """
-    # YOUR CODE HERE
-    pass
+    nums_size = len(nums)
+    p = [0] * (nums_size + 1)
+    for i in range(1, nums_size + 1):
+        p[i] = p[i - 1] + nums[i - 1]
 
+    return p[r + 1] - p[l]
 
+# !!!
 def prefix_interview(nums: list[int], k: int) -> int:
     """
     INTERVIEW - Subarray sum equals k.
@@ -545,8 +549,8 @@ def run_tests():
     # check("sliding_window_interview: pwwkew",   sliding_window_interview("pwwkew"),   3)
 
     # --- Binary search ---
-    check("binary_search_warmup: found",    binary_search_warmup([1,3,5,7,9], 5), 2)
-    check("binary_search_warmup: missing",  binary_search_warmup([1,3,5,7,9], 6), -1)
+    # check("binary_search_warmup: found",    binary_search_warmup([1,3,5,7,9], 5), 2)
+    # check("binary_search_warmup: missing",  binary_search_warmup([1,3,5,7,9], 6), -1)
     # check("binary_search_interview: rotated hit",   binary_search_interview([4,5,6,7,0,1,2], 0), 4)
     # check("binary_search_interview: rotated miss",  binary_search_interview([4,5,6,7,0,1,2], 3), -1)
     # check("binary_search_interview: [3,1] t=1",     binary_search_interview([3,1], 1),            1)
@@ -597,8 +601,8 @@ def run_tests():
     # --- Prefix sums ---
     # check("prefix_warmup: l=1 r=3", prefix_warmup([1,2,3,4,5], 1, 3), 9)
     # check("prefix_warmup: l=0 r=4", prefix_warmup([1,2,3,4,5], 0, 4), 15)
-    # check("prefix_interview: k=2",  prefix_interview([1,1,1], 2), 2)
-    # check("prefix_interview: k=3",  prefix_interview([1,2,3], 3), 2)
+    check("prefix_interview: k=2",  prefix_interview([1,1,1], 2), 2)
+    check("prefix_interview: k=3",  prefix_interview([1,2,3], 3), 2)
 
     # --- Print summary ---
     passed = sum(1 for r in results if r[0] == "PASS")
